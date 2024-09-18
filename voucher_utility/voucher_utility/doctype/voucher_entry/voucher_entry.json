@@ -9,13 +9,19 @@
   "naming_series",
   "payment_type",
   "mode_of_payment",
+  "company",
   "column_break_lfgg",
   "posting_date",
   "account",
+  "balance",
   "section_break_zcdf",
   "accounts_column",
   "voucher_accounts",
-  "section_break_vnwm",
+  "sb_accounting_dimensions",
+  "cost_center",
+  "column_break_fj1v",
+  "project",
+  "section_break_pneo",
   "total_amount",
   "user_remarks",
   "column_break_vjet",
@@ -34,7 +40,7 @@
    "fieldname": "payment_type",
    "fieldtype": "Select",
    "label": "Payment Type",
-   "options": "\nPay\nReceive"
+   "options": "Pay"
   },
   {
    "fetch_from": ".account_name",
@@ -51,17 +57,14 @@
    "default": "Today",
    "fieldname": "posting_date",
    "fieldtype": "Date",
-   "label": "Posting Date"
+   "label": "Posting Date",
+   "reqd": 1
   },
   {
    "fetch_from": ".enabled",
    "fieldname": "account",
    "fieldtype": "Data",
    "label": "Account"
-  },
-  {
-   "fieldname": "section_break_vnwm",
-   "fieldtype": "Section Break"
   },
   {
    "fieldname": "total_amount",
@@ -111,12 +114,49 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "balance",
+   "fieldtype": "Float",
+   "label": "Balance"
+  },
+  {
+   "fieldname": "sb_accounting_dimensions",
+   "fieldtype": "Section Break",
+   "label": "Accounting Dimensions"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Data",
+   "label": "Cost Center"
+  },
+  {
+   "fieldname": "column_break_fj1v",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fieldname": "section_break_pneo",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-05-30 17:05:23.977440",
+ "modified": "2024-09-18 11:33:08.842343",
  "modified_by": "Administrator",
  "module": "Voucher Utility",
  "name": "Voucher Entry",

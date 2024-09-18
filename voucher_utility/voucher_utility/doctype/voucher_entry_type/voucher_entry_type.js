@@ -1,7 +1,7 @@
 // Copyright (c) 2024, efeone and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on('Voucher Accounts', {
+frappe.ui.form.on('Accounts', {
     company: function(frm, cdt, cdn) {
         set_account_query(frm);
     },

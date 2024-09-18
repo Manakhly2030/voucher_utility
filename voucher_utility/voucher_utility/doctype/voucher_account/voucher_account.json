@@ -6,22 +6,24 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "voucher_entry_type",
   "account",
+  "amount",
   "party_type",
   "party",
   "column_break_pgpw",
   "reference_doctype",
+  "description",
   "reference_docname",
-  "amount"
+  "attachments"
  ],
  "fields": [
   {
    "fieldname": "account",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Account",
    "options": "Account",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "column_break_pgpw",
@@ -30,12 +32,14 @@
   {
    "fieldname": "reference_doctype",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Reference Doctype",
    "options": "DocType"
   },
   {
    "fieldname": "reference_docname",
    "fieldtype": "Dynamic Link",
+   "hidden": 1,
    "label": "Reference Docname",
    "options": "reference_doctype"
   },
@@ -43,11 +47,13 @@
    "fieldname": "amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Amount"
+   "label": "Amount",
+   "reqd": 1
   },
   {
    "fieldname": "party_type",
    "fieldtype": "Link",
+   "hidden": 1,
    "in_list_view": 1,
    "label": "Party Type",
    "options": "DocType",
@@ -56,15 +62,35 @@
   {
    "fieldname": "party",
    "fieldtype": "Dynamic Link",
+   "hidden": 1,
    "in_list_view": 1,
    "label": "Party",
    "options": "party_type"
+  },
+  {
+   "fieldname": "voucher_entry_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Voucher Entry Type",
+   "options": "Voucher Entry Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "attachments",
+   "fieldtype": "Attach Image",
+   "label": "Attachments"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Description"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-05-28 11:50:49.534348",
+ "modified": "2024-09-18 11:40:04.774652",
  "modified_by": "Administrator",
  "module": "Voucher Utility",
  "name": "Voucher Account",

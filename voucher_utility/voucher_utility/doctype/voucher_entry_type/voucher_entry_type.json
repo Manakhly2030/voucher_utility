@@ -20,12 +20,12 @@
    "fieldname": "accounts",
    "fieldtype": "Table",
    "label": "Accounts",
-   "options": "Accounts"
+   "options": "Voucher Accounts"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-18 12:09:10.374250",
+ "modified": "2024-09-18 12:46:17.121422",
  "modified_by": "Administrator",
  "module": "Voucher Utility",
  "name": "Voucher Entry Type",

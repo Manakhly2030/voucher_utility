@@ -39,21 +39,39 @@ frappe.ui.form.on('Voucher Entry', {
 
 
     },
-    refresh: function(frm) {
-        frm.add_custom_button(__('View'), function(){
-          frappe.call({
-          method: "voucher_utility.voucher_utility.doctype.voucher_entry.voucher_entry.view_journal_entry",
-          args: {
-            'voucher_entry':frm.doc.name
-          },
-          callback: function(r) {
-            if (r.message){
-              frappe.set_route('Form','Journal Entry', r.message);
-              }
-            }
-          })
-       })
-    },
+  refresh: function(frm) {
+        // Automatically fetch the balance when an account is selected
+        if (frm.doc.docstatus === 1) {
+         frm.add_custom_button(__('View'), function(){
+           frappe.call({
+           method: "voucher_utility.voucher_utility.doctype.voucher_entry.voucher_entry.view_journal_entry",
+           args: {
+             'voucher_entry':frm.doc.name
+           },
+           callback: function(r) {
+             if (r.message){
+               frappe.set_route('Form','Journal Entry', r.message);
+               }
+             }
+           });
+        });
+     }
+   },
+   account: function(frm){
+     if (frm.doc.account) {
+         frappe.call({
+             method: 'erpnext.accounts.utils.get_balance_on',
+             args: {
+                 account: frm.doc.account,
+             },
+             callback: function(r) {
+                 if (r.message) {
+                     frm.set_value('balance', r.message); // Set the balance field in the form
+                 }
+             }
+         });
+     }
+   }
 
   });
 

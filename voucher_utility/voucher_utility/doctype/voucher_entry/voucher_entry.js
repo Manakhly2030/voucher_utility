@@ -115,7 +115,6 @@ frappe.ui.form.on('Voucher Account', {
                     company: frm.doc.company
                 },
                 callback: function(response) {
-                  console.log(response);
                     if (response.message) {
                         let default_account = response.message;
                         frappe.model.set_value(cdt, cdn, 'account', default_account);

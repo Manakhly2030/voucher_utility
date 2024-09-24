@@ -63,8 +63,10 @@
   {
    "fetch_from": ".enabled",
    "fieldname": "account",
-   "fieldtype": "Data",
-   "label": "Account"
+   "fieldtype": "Link",
+   "label": "Account",
+   "options": "Account",
+   "read_only": 1
   },
   {
    "fieldname": "total_amount",
@@ -135,8 +137,9 @@
   },
   {
    "fieldname": "cost_center",
-   "fieldtype": "Data",
-   "label": "Cost Center"
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
   },
   {
    "fieldname": "column_break_fj1v",
@@ -156,7 +159,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-18 11:33:08.842343",
+ "modified": "2024-09-24 10:39:52.617346",
  "modified_by": "Administrator",
  "module": "Voucher Utility",
  "name": "Voucher Entry",

@@ -1,7 +1,8 @@
 from frappe.model.document import Document
 import frappe
 from frappe.utils import get_link_to_form
-from frappe import _ 
+from erpnext.accounts.utils import get_account_balances
+from frappe import _
 
 class VoucherEntry(Document):
     def on_submit(self):
@@ -21,6 +22,7 @@ class VoucherEntry(Document):
         journal_entry.user_remark = self.user_remarks
         journal_entry.cheque_date = self.reference_date
         journal_entry.cheque_no = self.bank_reference
+        journal_entry.cost_center = self.cost_center
         journal_entry.voucher_type = "Journal Entry"
 
         if self.payment_type == 'Pay':
@@ -73,7 +75,7 @@ def get_default_account(voucher_entry_type, company):
     Returns:
         str: The default account associated with the Voucher Entry Type and company.
     """
-    default_account = frappe.db.get_value('Accounts',{'parent': voucher_entry_type, 'parenttype': 'Voucher Entry Type', 'company': company}, 'default_account')
+    default_account = frappe.db.get_value('Voucher Accounts',{'parent': voucher_entry_type, 'parenttype': 'Voucher Entry Type', 'company': company}, 'default_account')
     return default_account
 
 @frappe.whitelist()

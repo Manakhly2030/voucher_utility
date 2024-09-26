@@ -71,6 +71,37 @@ frappe.ui.form.on('Voucher Entry', {
              }
          });
      }
+   },
+   mode_of_payment: function(frm) {
+       // Hide the account field initially
+       frm.set_df_property('account', 'hidden', true);
+       frm.refresh_field('account');
+
+       frappe.call({
+           method: "voucher_utility.voucher_utility.doctype.voucher_entry.voucher_entry.validate_mode_of_payment_with_bank_account",
+           args: {
+               voucher_entry: frm.doc.name,
+               mode_of_payment: frm.doc.mode_of_payment,
+               company: frm.doc.company
+           },
+           callback: function(r) {
+               if (r.exc) {
+                   frappe.msgprint(r.exc);
+                   return;
+               }
+
+               const { valid_accounts, has_company } = r.message || {};
+
+               // Show account field if company is associated
+               if (has_company) {
+                   frm.set_df_property('account', 'hidden', false);
+                   frm.refresh_field('account');
+
+                   // Set the first valid account or clear the field
+                   frm.set_value('account', valid_accounts.length ? valid_accounts[0] : '');
+               }
+           }
+       });
    }
 
   });

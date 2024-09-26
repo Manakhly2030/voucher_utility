@@ -101,3 +101,44 @@ def validate_company_for_voucher_entry_type(voucher_entry_type, company):
             )
         )
     return True
+
+@frappe.whitelist()
+def validate_mode_of_payment_with_bank_account(voucher_entry, mode_of_payment, company):
+    """
+    Validate if the selected Mode of Payment has a bank account associated for the specified company.
+    If no bank account is found, raise a validation error.
+
+    Args:
+        voucher_entry (str): Name of the Voucher Entry.
+        mode_of_payment (str): Mode of Payment selected.
+        company (str): Company name.
+
+    Raises:
+        frappe.ValidationError: If no valid bank account is associated with the Mode of Payment.
+
+    Returns:
+        dict: A dictionary containing a list of valid accounts and a boolean indicating the presence of a company.
+    """
+    # Fetch the Mode of Payment document
+    mop_doc = frappe.get_doc('Mode of Payment', mode_of_payment)
+
+    # Check if any accounts are linked to this Mode of Payment for the given company
+    valid_accounts = [
+        account.default_account for account in mop_doc.accounts
+        if account.company == company and account.default_account
+    ]
+
+    # If no valid accounts found, throw a validation error
+    if not valid_accounts:
+        frappe.throw(
+            _("Set the default account for the {0} {1}").format(
+                frappe.bold("Mode of Payment"),
+                get_link_to_form("Mode of Payment", mode_of_payment)
+            )
+        )
+
+    # Return the valid accounts and the presence of a company association
+    return {
+        "valid_accounts": valid_accounts,
+        "has_company": any(account.company == company for account in mop_doc.accounts)
+    }

@@ -106,7 +106,7 @@ frappe.ui.form.on('Voucher Entry', {
    before_save: function(frm) {
        // Check if balance is less than total_amount
        if (frm.doc.balance < frm.doc.total_amount) {
-           frappe.msgprint({
+           frappe.throw({
                title: __('Warning'),
                indicator: 'orange',
                message: __('Balance cannot be less than Total Amount.')

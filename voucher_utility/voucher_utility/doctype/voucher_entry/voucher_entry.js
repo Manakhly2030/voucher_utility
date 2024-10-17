@@ -102,6 +102,18 @@ frappe.ui.form.on('Voucher Entry', {
                }
            }
        });
+   },
+   before_save: function(frm) {
+       // Check if balance is less than total_amount
+       if (frm.doc.balance < frm.doc.total_amount) {
+           frappe.msgprint({
+               title: __('Warning'),
+               indicator: 'orange',
+               message: __('Balance cannot be less than Total Amount.')
+           });
+           // Prevent saving the document
+           frappe.validated = false;
+       }
    }
 
   });
@@ -165,3 +177,20 @@ function calculate_total_amount(frm) {
     });
     frm.set_value('total_amount', total);
 }
+
+
+
+// frappe.ui.form.on('Voucher Entry', {
+//     before_save: function(frm) {
+//         // Check if balance is less than total_amount
+//         if (frm.doc.balance < frm.doc.total_amount) {
+//             frappe.msgprint({
+//                 title: __('Warning'),
+//                 indicator: 'orange',
+//                 message: __('Balance cannot be less than Total Amount.')
+//             });
+//             // Prevent saving the document
+//             frappe.validated = false;
+//         }
+//     }
+// });
